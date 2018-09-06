@@ -79,7 +79,10 @@ void Core::checkVersion()
     const auto actual = m_traci->getVersion();
     EV_INFO << "TraCI server is " << actual.second << " with API level " << actual.first << endl;
 
-    if (expected < 0) {
+    if (actual.first < 18) {
+        EV_FATAL << "Reported TraCI server version is incompatible with client API" << endl;
+        throw cRuntimeError("Version of TraCI server is too old (required: 18, provided: %i), please update SUMO!", actual.first);
+    } else if (expected < 0) {
         EV_DEBUG << "No specific TraCI server version requested, accepting connection..." << endl;
     } else if (expected != actual.first) {
         EV_FATAL << "Reported TraCI server version does not match expected version " << expected << endl;
