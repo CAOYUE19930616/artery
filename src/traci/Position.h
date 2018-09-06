@@ -8,10 +8,10 @@
 namespace traci
 {
 
-using TraCIPosition = libsumo::TraCIPosition;
+using libsumo::TraCIPosition;
 
-Position position_cast(const TraCIBoundary&, const TraCIPosition&);
-TraCIPosition position_cast(const TraCIBoundary&, const Position&);
+Position position_cast(const Boundary&, const TraCIPosition&);
+TraCIPosition position_cast(const Boundary&, const Position&);
 
 } // namespace traci
 

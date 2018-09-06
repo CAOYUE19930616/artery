@@ -58,7 +58,7 @@ void StationaryMiddleware::initializePosition()
 	// TODO inet::IGeographicCoordinateSystem provided by TraCI module would be nice
 	auto traci = inet::getModuleFromPar<traci::Core>(par("traciCoreModule"), host);
 	traci::LiteAPI& api = traci->getLiteAPI();
-	const traci::TraCIBoundary& boundary = api.simulation().getNetBoundary();
+	const traci::Boundary boundary { api.simulation().getNetBoundary() };
 	traci::TraCIGeoPosition geopos = api.convertGeo(traci::position_cast(boundary, Position { pos.x, pos.y }));
 
 	using namespace vanetza::units;

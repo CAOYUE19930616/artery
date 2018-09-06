@@ -3,18 +3,22 @@
 namespace traci
 {
 
-Position position_cast(const TraCIBoundary& boundary, const TraCIPosition& pos)
+Position position_cast(const Boundary& boundary, const TraCIPosition& pos)
 {
-    const double x = pos.x - boundary.xMin;
-    const double y = boundary.yMax - pos.y;
+    const double x = pos.x - boundary.lowerLeftPosition().x;
+    const double y = boundary.upperRightPosition().y - pos.y;
     return Position(x, y);
 }
 
-TraCIPosition position_cast(const TraCIBoundary& boundary, const Position& pos)
+TraCIPosition position_cast(const Boundary& boundary, const Position& pos)
 {
-    const double x = pos.x.value() + boundary.xMin;
-    const double y = boundary.yMax - pos.y.value();
-    return TraCIPosition { x, y, 0.0 };
+    const double x = pos.x.value() + boundary.lowerLeftPosition().x;
+    const double y = boundary.upperRightPosition().y - pos.y.value();
+    TraCIPosition tmp;
+    tmp.x = x;
+    tmp.y = y;
+    tmp.z = 0.0;
+    return tmp;
 }
 
 } // namespace traci

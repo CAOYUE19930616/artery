@@ -63,7 +63,7 @@ void Core::handleMessage(omnetpp::cMessage* msg)
         checkVersion();
         syncTime();
         emit(initSignal, simTime());
-        m_updateInterval = time_cast(m_traci->simulation.getDeltaT());
+        m_updateInterval = Time { m_traci->simulation.getDeltaT() };
         scheduleAt(simTime() + m_updateInterval, m_updateEvent);
     }
 }
